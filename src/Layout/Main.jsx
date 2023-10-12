@@ -4,7 +4,7 @@ import Navbar from "../pages/Shared/Navbar/Navbar";
 
 const Main = () => {
     const location = useLocation();
-    const noHeader = location.pathname.includes('checkout');
+    const noHeader = location.pathname.includes('checkout') || location.pathname.includes('bookings');
     return (
         <div>
             {noHeader ||<Navbar></Navbar>}

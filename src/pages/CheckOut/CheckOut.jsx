@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const CheckOut = () => {
@@ -38,7 +39,15 @@ const CheckOut = () => {
          .then((data) => {
            console.log(data);
            if (data.insertedId) {
-             alert("service book successfully");
+            Swal.fire({
+                
+              title: "Done",
+              text: "Order Completed Successfully",
+              imageUrl: "https://unsplash.it/400/200",
+              imageWidth: 400,
+              imageHeight: 200,
+              imageAlt: "Custom image",
+            });
            }
          });
      };

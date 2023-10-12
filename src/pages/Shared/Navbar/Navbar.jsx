@@ -25,21 +25,17 @@ const Navbar = () => {
       {/* <li>
         <Link to="/login">Login</Link>
       </li> */}
-      <li>
-        {user ? (
-          <>
-            <button onClick={handleLogOut} className="btn btn-ghost">
-              LogOut
-            </button>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </>
-        )}
-      </li>
+
+      {user ? 
+        <>
+        <li><Link to="/bookings">My Bookings</Link></li>
+        <li><button onClick={handleLogOut} className="btn btn-ghost">LogOut</button></li>
+        </>
+       : 
+        <>
+          <li><Link to="/login">Login</Link></li>
+        </>
+      }
     </>
   );
   return (
