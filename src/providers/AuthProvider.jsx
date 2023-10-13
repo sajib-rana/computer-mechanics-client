@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
@@ -15,6 +17,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+   const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -26,6 +29,11 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+   const googleSignIn = () => {
+     setLoading(true);
+     return signInWithPopup(auth, googleProvider);
+   };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -36,6 +44,26 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log("current user", currentUser);
       setLoading(false);
+      
+      if(currentUser && currentUser.email){
+        const loggedUser = {
+          email: currentUser.email
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("access-token", data.token);
+          });
+      }
+      else{
+        localStorage.removeItem("access-token");
+      }
     });
     return () => {
       return unsubscribe();
@@ -47,6 +75,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     signIn,
+    googleSignIn,
     logOut
   };
 

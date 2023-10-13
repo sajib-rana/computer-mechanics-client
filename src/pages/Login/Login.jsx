@@ -3,6 +3,7 @@ import img from "../../assets/imges/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -20,20 +21,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        const loggedUser = {
-          email: user.email
-        };
-        fetch("http://localhost:5000/jwt",{
-          method: 'POST',
-          headers:{
-            'content-type':'application/json'
-          },
-          body: JSON.stringify(loggedUser)
-        })
-        .then(res =>res.json())
-        .then(data =>{
-          localStorage.setItem('access-token', data.token)
-        })
+        
+        
         Swal.fire({
         title: "User Login Successful.",
         showClass: {
@@ -99,6 +88,7 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
