@@ -16,11 +16,24 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
     signIn(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        const loggedUser = {
+          email: user.email
+        };
+        fetch("http://localhost:5000/jwt",{
+          method: 'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(loggedUser)
+        })
+        .then(res =>res.json())
+        .then(data =>{
+          localStorage.setItem('access-token', data.token)
+        })
         Swal.fire({
         title: "User Login Successful.",
         showClass: {
@@ -61,7 +74,7 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
@@ -81,10 +94,10 @@ const Login = () => {
               </div>
             </form>
             <p className="my-4 text-center">
-              New to Car Doctors{" "}
+              New to Computer-Mechanics {" "}
               <Link className="text-orange-600 font-bold" to="/signup">
                 Sign Up
-              </Link>{" "}
+              </Link>
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -8,7 +8,9 @@ const CheckOut = () => {
      const service = useLoaderData();
      const { title, _id, price, img } = service;
      const { user } = useContext(AuthContext);
-    console.log(user)
+      const location = useLocation();
+      const navigate = useNavigate();
+    
      const handleBookService = (event) => {
        event.preventDefault();
 
@@ -26,30 +28,44 @@ const CheckOut = () => {
          price: price,
        };
 
-       console.log(booking);
 
-       fetch("http://localhost:5000/bookings", {
-         method: "POST",
-         headers: {
-           "content-type": "application/json",
-         },
-         body: JSON.stringify(booking),
-       })
-         .then((res) => res.json())
-         .then((data) => {
-           console.log(data);
-           if (data.insertedId) {
-            Swal.fire({
-                
-              title: "Done",
-              text: "Order Completed Successfully",
-              imageUrl: "https://unsplash.it/400/200",
-              imageWidth: 400,
-              imageHeight: 200,
-              imageAlt: "Custom image",
-            });
+      if(user){
+         fetch("http://localhost:5000/bookings", {
+           method: "POST",
+           headers: {
+             "content-type": "application/json",
+           },
+           body: JSON.stringify(booking),
+         })
+           .then((res) => res.json())
+           .then((data) => {
+             console.log(data);
+             if (data.insertedId) {
+               Swal.fire({
+                 title: "Done",
+                 text: "Order Completed Successfully",
+                 imageUrl: "https://unsplash.it/400/200",
+                 imageWidth: 400,
+                 imageHeight: 200,
+                 imageAlt: "Custom image",
+               });
+             }
+           });
+      }
+      else{
+         Swal.fire({
+           title: "Please login before purchase",
+           icon: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#3085d6",
+           cancelButtonColor: "#d33",
+           confirmButtonText: "Login now!",
+         }).then((result) => {
+           if (result.isConfirmed) {
+             navigate("/login", { state: { from: location } });
            }
          });
+      }
      };
     return (
       <div>
@@ -61,6 +77,7 @@ const CheckOut = () => {
                 <span className="label-text">Name</span>
               </label>
               <input
+              required
                 type="text"
                 defaultValue={user?.displayName}
                 name="name"
@@ -71,13 +88,14 @@ const CheckOut = () => {
               <label className="label">
                 <span className="label-text">Date</span>
               </label>
-              <input type="date" name="date" className="input input-bordered" />
+              <input required type="date" name="date" className="input input-bordered" />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
+              required
                 type="text"
                 name="email"
                 defaultValue={user?.email}
@@ -90,6 +108,7 @@ const CheckOut = () => {
                 <span className="label-text">Due amount</span>
               </label>
               <input
+              required
                 type="text"
                 defaultValue={"$" + price}
                 className="input input-bordered"
