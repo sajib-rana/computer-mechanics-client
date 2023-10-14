@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -39,6 +40,9 @@ const Login = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
+      <Helmet>
+        <title>computer mechanics | Login</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-1/2 mr-12">
           <img src={img} alt="" />
@@ -83,7 +87,7 @@ const Login = () => {
               </div>
             </form>
             <p className="my-4 text-center">
-              New to Computer-Mechanics {" "}
+              New to Computer-Mechanics{" "}
               <Link className="text-orange-600 font-bold" to="/signup">
                 Sign Up
               </Link>

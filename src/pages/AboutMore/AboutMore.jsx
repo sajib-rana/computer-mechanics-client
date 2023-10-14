@@ -1,11 +1,15 @@
-import Banner from "../Home/Banner/Banner";
+// import Banner from "../Home/Banner/Banner";
+import { Helmet } from 'react-helmet-async';
 import img from '../../assets/imges/banner-1.webp'
 
 
 const AboutMore = () => {
     return (
       <div>
-        <Banner></Banner>
+        <Helmet>
+          <title>computer mechanics | AboutMore</title>
+        </Helmet>
+        {/* <Banner></Banner> */}
         <div className="hero min-h-screen bg-base-200">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <img src={img} className="max-w-sm rounded-lg shadow-2xl" />

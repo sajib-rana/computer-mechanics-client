@@ -3,6 +3,7 @@ import img from "../../assets/imges/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -30,6 +31,9 @@ const SignUp = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
+      <Helmet>
+        <title>computer mechanics | SignUp</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-1/2 mr-12">
           <img src={img} alt="" />
