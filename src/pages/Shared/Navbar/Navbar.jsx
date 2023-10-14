@@ -19,14 +19,8 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="about">About</Link>
+        <Link to="aboutmore">About More</Link>
       </li>
-      <li>
-        <Link to="/portfolio">Portfolio</Link>
-      </li>
-      {/* <li>
-        <Link to="/login">Login</Link>
-      </li> */}
 
       {user ? 
         <>

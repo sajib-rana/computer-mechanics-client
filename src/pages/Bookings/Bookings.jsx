@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import BookingRow from "./BookingRow";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
@@ -69,7 +69,9 @@ const Bookings = () => {
 
   return (
     <div>
+      
       <h2 className="text-5xl">Your bookings: {bookings.length}</h2>
+      <Link className="btn btn-active btn-ghost my-8" to='/'>Back</Link>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* head */}

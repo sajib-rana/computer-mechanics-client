@@ -22,9 +22,9 @@ const ExpertTeam = () => {
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           {reviews.map((review) => (
             <SwiperSlide key={review._id}>
-              <div className="flex flex-col items-center my-16">
+              <div className="flex flex-col items-center my-6">
                   <img src={review.img} alt="" />
-                <p className="py-8">{review.name}</p>
+                <p className="pt-2">{review.name}</p>
                 <h3 className="text-2xl text-orange-400">{review.reviews}</h3>
               </div>
             </SwiperSlide>

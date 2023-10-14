@@ -2,21 +2,21 @@
       {
         "id": 1,
         "name": "Winson Harry",
-        "reviews":"This is very good service.",
+        "reviews":"Computer Expert",
         "img": "https://i.ibb.co/SdMGCY3/sajib.webp",
         "state": "New York"
       },
       {
         "id": 2,
         "name": "Ms Harry",
-        "reviews":"This is very good service.",
+        "reviews":"Operating System Expert",
         "img": "https://i.ibb.co/SdMGCY3/sajib.webp",
         "state": "Washington DC"
       },
       {
         "id": 3,
         "name": "Harry potan",
-        "reviews":"This is very good service.",
+        "reviews":"Software Expert",
         "img": "https://i.ibb.co/SdMGCY3/sajib.webp",
         "state": "California"
       }

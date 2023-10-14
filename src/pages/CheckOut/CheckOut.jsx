@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Banner from "../Home/Banner/Banner";
 
 
 const CheckOut = () => {
@@ -69,6 +70,7 @@ const CheckOut = () => {
      };
     return (
       <div>
+        <Banner></Banner>
         <h2 className="text-center text-3xl">Book Service: {title} </h2>
         <form onSubmit={handleBookService}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

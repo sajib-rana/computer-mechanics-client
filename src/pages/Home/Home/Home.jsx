@@ -5,6 +5,7 @@ import Services from "../Services/Services";
 import Testimonial from "../Testimonial/Testimonial";
 import Info from "../Info/Info";
 import ExpertTeam from "../ExpertTeam/ExpertTeam";
+import Featured from "../Featured/Featured";
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
           <Services></Services>
           <Info></Info>
           <ExpertTeam></ExpertTeam>
+          <Featured></Featured>
           <Testimonial></Testimonial>
         
       </div>
